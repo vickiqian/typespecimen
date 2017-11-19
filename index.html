@@ -1,0 +1,490 @@
+<html>
+    <head>
+      <link href="https://fonts.googleapis.com/css?family=Overpass+Mono:400,700" rel="stylesheet">
+      <link rel="stylesheet" href="style.css">
+      <title>Overpass Mono</title>
+
+
+    <style>
+/* YUI 3.5.0 reset.css (http://developer.yahoo.com/yui/3/cssreset/) - http://cssreset.com */
+html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,figure,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:text-top}sub{vertical-align:text-bottom}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit}input,textarea,select{*font-size:100%}legend{color:#000}#yui3-css-stamp.cssreset{display:none}
+      
+      html {
+        font-size: 22px;
+        font-family: 'Overpass Mono', monospace;
+        cursor: wait;
+        overflow-x: hidden;
+      }
+      .circle{
+        grid-column: 4/ span 6;
+        grid-row: 1/ span 6;
+        border: 10px red solid;
+        border-radius: 50%;
+        width: 90vh;
+        height: 90vh;
+        margin-top: 5vh;
+        position: fixed;
+        z-index: 1;
+      }
+/*
+      container{
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: repeat(63, 16vh);
+        
+      }
+      
+      .circle{
+        grid-column: 4/ span 6;
+        grid-row: 1/ span 6;
+        border: 0.5em red solid;
+        border-radius: 50%;
+        width: 45vw;
+        height: 45vw;
+        margin-top: 4vh;
+        left: 26.5vw;
+        position: fixed;
+        z-index: 1;
+      }
+      .text-s1{
+        grid-column: 8/ span 4;
+        grid-row: 1/ 4;
+        margin: 1em;
+        font-weight: 400;
+        z-index: 2;
+      }
+      .o{
+        grid-column: 11;
+        grid-row: 2;
+        font-size: 3rem;
+        text-align: center;
+        color: blue;
+        margin-top: .4em;
+        z-index: 3;
+        animation: 2s move cubic-bezier(.6,-0.28,.74,.05) infinite;
+        
+      }
+       @keyframes move {
+        0%, 100% {
+          transform: translate(0, 0);
+        }
+
+        50% {
+          transform: translate(0, 50px);
+        }
+
+        80% {
+          transform: translate(0, -20px);
+        }
+      }
+       @keyframes move-h {
+        0%, 100% {
+          transform: translate(0, 0);
+        }
+
+        50% {
+          transform: translate(100px, 0px);
+        }
+
+        80% {
+          transform: translate(-10px, 0px);
+        }
+      }
+      @keyframes move-d {
+        0%, 100% {
+          transform: translate(0, 0);
+        }
+
+        50% {
+          transform: translate(100px, -100px);
+        }
+
+        80% {
+          transform: translate(0px, 0px);
+        }
+      }
+      @keyframes move-c {
+        0%, 100% {
+          transform: translate(0, 0);
+        }
+
+        50% {
+          transform: translate(800px, 0px);
+        }
+
+        80% {
+          transform: translate(-300px, 0px);
+        }
+        
+      }
+       
+      .text-s2{
+        grid-column: 1/ span 6;
+        grid-row: 3/ 5;
+        margin: 1em;
+        font-weight: 400;
+        z-index: 2;
+      }
+      .m{
+        grid-column: 4/ 6;
+        grid-row: 3;
+        font-size: 3rem;
+        text-align: center;
+        color: blue;
+        margin-bottom: .4em;
+        z-index: 3;
+        animation: 2s move-h cubic-bezier(.6,-0.28,.74,.05) infinite;
+        animation-direction: reverse;
+        animation-delay: 1s;
+      }
+      .text-s3{
+        grid-column: 10/ 13;
+        grid-row: 5/ 7;
+        margin: 1em;
+        font-weight: 400;
+        z-index: 2;
+      }
+      .n{
+        grid-column: 10;
+        grid-row: 5;
+        font-size: 3rem;
+        text-align: left;
+        color: blue;
+        margin-top: -.2em;
+        z-index: 3;
+        animation: 2s move-h cubic-bezier(.6,-0.28,.74,.05) infinite;
+      }
+      .text-s4{
+        grid-column: 5/ 8;
+        grid-row: 6/ 10;
+        margin: 1em;
+        font-weight: 400;
+        z-index: 2;
+      }
+      .o1{
+        grid-column: 5;
+        grid-row: 6;
+        font-size: 3rem;
+        text-align: left;
+        color: blue;
+        margin-top: -.2em;
+        z-index: 3;
+        animation: 2s move cubic-bezier(.6,-0.28,.74,.05) infinite;
+        animation-delay: 0.5s;
+      }
+      .text-s5{
+        grid-column: 8/ span 4;
+        grid-row: 11/ span 3;
+        margin: 1em;
+        font-weight: 400;
+        z-index: 2;
+      }
+      .o2{
+        grid-column: 2;
+        grid-row: 12;
+        font-size: 3rem;
+        text-align: left;
+        margin-top: .3em;
+        color: blue;
+        z-index: 3;
+        animation: 2s move-h cubic-bezier(.6,-0.28,.74,.05) infinite;
+        
+      }
+      .text-s6{
+        grid-column: 1/ 6;
+        grid-row: 14/ 16;
+        margin: 1em;
+        font-weight: 400;
+        z-index: 2;  
+        transform: rotate(90deg);
+          
+      }
+      
+      .v{
+        grid-column: 8;
+        grid-row: 13;
+        font-size: 3rem;
+        text-align: left;
+        color: blue;
+        margin-bottom: .3em;
+        z-index: 3;
+        animation: 2s move cubic-bezier(.6,-0.28,.74,.05) infinite;
+        animation-delay: 1s;
+      }
+      .text-s7{
+        grid-column: 7/ 9;
+        grid-row: 17/ 19;
+        margin: 1em;
+        font-weight: 400;
+        z-index: 2;  
+      }
+      .e{
+        grid-column: 7;
+        grid-row: 19;
+        font-size: 3rem;
+        text-align: left;
+        margin-top: .3em;
+        color: blue;
+        z-index: 3;
+        animation: 2s move-h cubic-bezier(.6,-0.28,.74,.05) reverse infinite;
+         
+      }
+      .text-l1{
+        grid-column: 2/ span 6;
+        grid-row: 21/ 25;
+        margin: 1em;
+        font-weight: 400;
+        z-index: 2; 
+        font-size: 1.2rem;
+        transform: rotate(45deg);
+      }
+      .text-l1-red{
+        grid-column: 2/ span 6;
+        grid-row: 22/ 26;
+        margin: 1em;
+        font-weight: 400;
+        z-index: 2; 
+        font-size: 1.2rem;
+        transform: rotate(45deg);
+        color:red;
+        z-index: 1.5;
+      }
+      .r{
+        grid-column: 2;
+        grid-row: 21;
+        font-size: 3rem;
+        font-weight: 700;
+        text-align: left;
+        margin-top: .3em;
+        color: blue;
+        z-index: 3;
+        animation: 2s move-d cubic-bezier(.6,-0.28,.74,.05) reverse infinite;
+        animation-delay: .5s;
+      }
+      .text-l2{
+        grid-column: 8/ span 4;
+        grid-row: 27/ 29;
+        margin: 1em;
+        font-weight: 400;
+        z-index: 2; 
+        font-size: 1.4rem;
+       
+      }
+      .text-l2-red{
+        grid-column: 9/ span 4;
+        grid-row: 28/ 30;
+        margin: 1em;
+        font-weight: 400;
+        z-index: 1.5; 
+        font-size: 1.4rem;
+        color: red;
+      }
+      .p{
+        grid-column: 9;
+        grid-row: 29;
+        font-size: 4rem;
+        font-weight: 700;
+        text-align: left;
+        margin-top: -1.5em;
+        color: blue;
+        z-index: 3;
+        animation: 2s move-h cubic-bezier(.6,-0.28,.74,.05) reverse infinite;
+        
+      }
+      .text-l3{
+        grid-column: 2/ span 7;
+        grid-row: 33/ 35;
+        margin: 1em;
+        font-weight: 400;
+        z-index: 2; 
+        font-size: 1.4rem;
+      }
+      .text-l3-red{
+        grid-column: 1/ span 7;
+        grid-row: 36/ 38;
+        margin: 1em;
+        font-weight: 400;
+        z-index: 1.5; 
+        font-size: 1.4rem;
+        color: red;
+        transform: rotate(90deg);
+      }
+      .a{
+        grid-column: 3;
+        grid-row: 36;
+        font-size: 4rem;
+        font-weight: 700;
+        text-align: left;
+        margin-top: -1.5em;
+        color: blue;
+        z-index: 3;
+        animation: 2s move cubic-bezier(.6,-0.28,.74,.05) infinite;
+        
+      }
+      .text-l4{
+        grid-column: 8/ span 5;
+        grid-row: 40/ span 5;
+        margin: 1em;
+        font-weight: 400;
+        z-index: 2; 
+        font-size: 1.6rem;
+      }
+      .text-l4-red{
+        grid-column: 7/ span 5;
+        grid-row: 41/ span 5;
+        margin: 1em;
+        font-weight: 400;
+        z-index: 1.5; 
+        font-size: 1.6rem;
+        color: red;
+      }
+      .s{
+        grid-column: 7;
+        grid-row: 43;
+        font-size: 4rem;
+        font-weight: 700;
+        text-align: left;
+        margin-top: -1.5em;
+        color: blue;
+        z-index: 3;
+        animation: 2s move-d cubic-bezier(.6,-0.28,.74,.05) infinite;
+      }
+      .text-l5{
+        grid-column: 1/ span 10;
+        grid-row: 51/ span 5;
+        margin: 1em;
+        font-weight: 400;
+        z-index: 2; 
+        font-size: 1.6rem;
+      }
+      .text-l5-red{
+        grid-column: 3/ span 10;
+        grid-row: 51/ span 5;
+        margin: 1em;
+        font-weight: 400;
+        z-index: 1.5; 
+        font-size: 1.6rem;
+        color: red;
+        text-align: right;
+      }
+      .s1{
+        grid-column: 7;
+        grid-row: 55;
+        font-size: 4rem;
+        font-weight: 700;
+        text-align: left;
+        margin-top: -1.6em;
+        margin-left: -3.5em;
+        color: blue;
+        z-index: 3;
+        animation: 2s move-c cubic-bezier(.6,-0.28,.74,.05) infinite;
+      }
+      .name{
+        grid-column: 4/ 10;
+        grid-row: 61;
+        font-size: 1em;
+        letter-spacing: 1rem;
+        text-align: center;
+        margin-top: -1vh;
+        animation-delay: 10s;
+        -webkit-animation: 3s opacity linear infinite;
+        -moz-animation: 3s opacity linear infinite;
+        -o-animation: 3s opacity linear infinite;
+        animation: 3s opacity linear infinite;
+      }
+      @-webkit-keyframes opacity {
+        0%, 100%   { opacity: 0; }
+        50% { opacity: 1; }
+      }
+      @-moz-keyframes opacity {
+        0%, 100%   { opacity: 0; }
+        50% { opacity: 1; }
+      }
+      @-o-keyframes opacity {
+        0%, 100%   { opacity: 0; }
+        50% { opacity: 1; }
+      }
+      @keyframes opacity {
+        0%, 100%   { opacity: 0; }
+        50% { opacity: 1; }
+      } */
+      </style>
+    </head>
+    <body>
+        <container>
+         <sidebar>
+          <div class="link menu"></div>
+          <a class="link" href="lobstertwo.html">Lobster Two</a>
+          <a class="link" href="amaticsc.html">Amatic SC</a> 
+         </sidebar>
+          <div class="circle" style="justify-self: center;" style="align-self: center;"></div>
+
+          <div class="text-s1">
+            Lorem ipsum dolor sitmet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliLorem ipsum dolor sit 
+          </div>
+          <div class="o">O</div>
+          <div class="text-s2">
+            Lorem ipsum dolor sitmet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat 
+          </div>
+          <div class="m">M</div>
+          <div class="text-s3">
+            Lorem ipsum dolor sitmet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali
+          </div>
+          <div class="n">N</div>
+          <div class="text-s4">
+            Lorem ipsum dolor sitmet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tin
+          </div>
+          <div class="o1">O</div>
+          
+          <div class="text-s5">
+            Lorem ipsum dolor sitmet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tin
+          </div>
+          <div class="v">V</div>
+          <div class="text-s6">
+            Lorem ipsum dolor sitmet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tin
+          </div>
+          <div class="o2">O</div>
+          <div class="text-s7">
+            Lorem ipsum dolor sitmet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tin
+          </div>
+          <div class="e">E</div>
+          <div class="text-l1">
+            Lorem ipsum dolor sitmet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tin
+          </div>
+          <div class="text-l1-red">
+            Lorem ipsum dolor sitmet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tin
+          </div>
+          <div class="r">R</div>
+          <div class="text-l2">
+            Lorem ipsum dolor sitmet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali
+          </div>
+          <div class="text-l2-red">
+            Lorem ipsum dolor sitmet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ali
+          </div>
+          <div class="p">P</div>
+          <div class="text-l3">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation 
+          </div>
+          <div class="text-l3-red">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation 
+          </div>
+          <div class="a">A</div>
+          <div class="text-l4">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation 
+          </div>
+          <div class="text-l4-red">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation 
+          </div>
+          <div class="s">S</div>
+          <div class="text-l5">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis
+          </div>
+          <div class="text-l5-red">
+            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis
+          </div>  
+          <div class="s1">S</div>
+          <div class="name">overpass mono</div>
+        </container>
+      
+    </body>
+</html>
